@@ -62,7 +62,7 @@
 	</table>
 	
 	<h3>Punch Distance Calculator</h3>
-	<img src="air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg" />
+	<img src="air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg" width="500px" />
       <table>
 	<tr>
 	  <td>Flange Diff</td>
@@ -73,10 +73,11 @@
 	  <td><input value="{{ML}}" type="number"/>mm</td>
 	</tr>
 	<tr>
-	  <td>x = ML + FD = {{round2(ML)}} mm + {{round2(fdiffInput)}} mm =</td>
-	  <td>{{round2(ML + fdiffInput)}} mm</td>
+	  <td><span style="color: red">x = ML + FD</span> = {{round2(ML)}} mm + {{round2(fdiffInput)}} mm =</td>
+	  <td><b>{{round2(ML + fdiffInput)}} mm</b></td>
 	</tr>
       </table>
+      <div style="height: 200px"></div>
 	
 	<!--
 	<h3>Further values</h3>
