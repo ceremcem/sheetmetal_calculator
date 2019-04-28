@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="libs/bootstrap-3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/bootstrap-3.3.7/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hind:400,600,700">
+	
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Ractive -->
+	<script src='https://cdn.jsdelivr.net/npm/ractive'></script>
+</head>
+<body>
+<h2>
+  Sheet Metal Bending Calculator
+</h2>
+
+<table>
+	<tr>
+    <td>Inner radius</td>
+    <td><input value="{{innerRadius}}" placeholder="Inner effective radius" type="number"/>mm</td>
+  </tr>  
+  <tr>
+    <td>Material thickness</td>
+    <td><input value="{{Mt}}" type="number"/>mm</td>
+  </tr>
+  <tr>
+    <td>Bend angle</td>
+    <td><input value="{{bendAngle}}" disabled type="number"/>°</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <h3>
+        Get <u>Flange Diff</u> by using K-factor 
+      </h3>
+      <table>
+        <tr>
+          <td>K-factor (ANSI)</td>
+          <td><input value="{{kFactor}}" type="number"/></td>
+        </tr>
+        <tr>
+          <td>Flange Diff (FD)</td>
+          <td>{{flangeDiff}} mm</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <h3>
+        Get <u>K-factor</u> by using Flange Diff 
+      </h3>
+      <table>
+        <tr>
+          <td>Flange Diff</td>
+          <td><input value="{{fdiffInput}}" type="number" placeholder='Flange - Mold_Line_dist'/>mm</td>
+        </tr>
+        <tr>
+          <td>K-factor (ANSI)</td>
+          <td>{{getKFactor(fdiffInput)}}</td>
+        </tr>
+      </table>
+    </td>
+
+  </tr>
+</table>
+<!--
+<h3>Further values</h3>
+<table>
+  <tr>
+    <td>Bend Allowance (BA)</td>
+    <td>{{bendAllowance}} mm</td>
+  </tr>
+</table>
+-->
+  
+<script>  
+  function round2(val){
+    return parseInt(val * 100 + 0.5) / 100
+  }
+
+  const App = Ractive.extend({
+    template: $TEMPLATE,
+    css: $CSS,
+    cssId: 'app',
+    data: {
+      innerRadius: 1.64,
+      Mt: 2,
+      kFactor: 0.38,
+      bendAngle: 90,
+      round2: round2,
+      getKFactor: function(flangeDiff){
+				var ossb = this.get('ossb')
+  			var ba = 2 * (ossb - flangeDiff)
+        var arc = this.get('bendAngle') / 360.0
+        var r = this.get('innerRadius')
+        var Mt = this.get('Mt')
+		    var kFactor = (ba / (2.0 * Math.PI * arc) - r) / Mt 
+       	return round2(kFactor) 
+    	}	
+    },
+    on: {
+    	'sayHello': function(ctx){
+        alert(t('say hello'))
+	  	}
+  	},
+    computed: {
+      bendAllowance: function(){
+        var arc = this.get('bendAngle') / 360.0
+        var r = this.get('innerRadius')
+        var Mt = this.get('Mt')
+        var kFactor = this.get('kFactor')
+		    var ba = 2.0 * Math.PI * (r + Mt * kFactor) * arc
+        return round2(ba)
+      }, 
+      ossb: function(){
+        // outside set back 
+        var r = this.get('innerRadius')
+        var Mt = this.get('Mt')
+        return round2(r + Mt)
+      },
+      flangeDiff: function(){
+        return round2(this.get('ossb') - this.get('bendAllowance') / 2)
+      }
+    }
+  });
+
+  const app = window.app = new App({
+    target: 'body'
+  });
+</script>
+
+<style>
+  h1 { color: #00818a; }
+</style>
+</body>
+</html>
