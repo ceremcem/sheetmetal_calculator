@@ -60,6 +60,24 @@
 
 	  </tr>
 	</table>
+	
+	<h3>Punch Distance Calculator</h3>
+	<img src="air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg" />
+      <table>
+	<tr>
+	  <td>Flange Diff</td>
+	  <td><input value="{{fdiffInput}}" type="number"/>mm</td>
+	</tr>
+	<tr>
+	  <td>Mold Line Distance</td>
+	  <td><input value="{{ML}}" type="number"/>mm</td>
+	</tr>
+	<tr>
+	  <td>x = ML + FD = {{round2(ML)}} mm + {{round2(fdiffInput)}} mm =</td>
+	  <td>{{round2(ML + fdiffInput)}} mm</td>
+	</tr>
+      </table>
+	
 	<!--
 	<h3>Further values</h3>
 	<table>
