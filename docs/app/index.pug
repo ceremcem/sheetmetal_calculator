@@ -18,11 +18,10 @@ html
         script(src="js/setImmediate-min.js")
         script(src="js/ractive-min.js")
 
-        // LiveScript dependencies 
-        script(type="text/ls" src="ls/event-emitter.ls")
-        script(type="text/ls" src="app/app.ls")
-        script require('livescript').go();
 
     body
         script(type="text/ractive" id="template")
             include app.pug
+
+        // App
+        script(src="app.js")

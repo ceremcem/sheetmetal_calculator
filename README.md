@@ -4,7 +4,7 @@ See https://ceremcem.github.io/sheetmetal_calculator/
 
 # Development 
 
-1. Run `run-webserver.sh` in a terminal. 
-2. Run `build.sh` in another terminal. 
+1. Run `build.sh` in another terminal. 
+1. Open `index.html` in your browser. 
 
-Editing `app.pug` (and `index.pug`) will instantly update the `index.html`.
+Editing `app/app.pug` (and `index.pug`) will instantly update the `index.html`.
