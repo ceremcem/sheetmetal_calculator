@@ -1,147 +1,105 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-	<!-- Ractive -->
-	<script src='https://cdn.jsdelivr.net/npm/ractive'></script>
-</head>
-<body>
-	<script type="text/ractive" id="template">
-	<h2>
-	  <a href="https://github.com/ceremcem/sheetmetal_calculator">Sheet Metal Bending Calculator</a>
-	</h2>
-
-	<table>
-		<tr>
-	    <td>Inner radius</td>
-	    <td><input value="{{innerRadius}}" placeholder="Inner effective radius" type="number"/>mm</td>
-	  </tr>  
-	  <tr>
-	    <td>Material thickness</td>
-	    <td><input value="{{Mt}}" type="number"/>mm</td>
-	  </tr>
-	  <tr>
-	    <td>Bend angle</td>
-	    <td><input value="{{bendAngle}}" disabled type="number"/>°</td>
-	  </tr>
-	</table>
-
-	<table>
-	  <tr>
-	    <td>
-	      <h3>
-		Get <u>Flange Diff</u> by using K-factor 
-	      </h3>
-	      <table>
-		<tr>
-		  <td>K-factor (ANSI)</td>
-		  <td><input value="{{kFactor}}" type="number"/></td>
-		</tr>
-		<tr>
-		  <td>Flange Diff (FD)</td>
-		  <td>{{flangeDiff}} mm</td>
-		</tr>
-	      </table>
-	    </td>
-	    <td>
-	      <h3>
-		Get <u>K-factor</u> by using Flange Diff 
-	      </h3>
-	      <table>
-		<tr>
-		  <td>Flange Diff</td>
-		  <td><input value="{{fdiffInput}}" type="number" placeholder='Flange - Mold_Line_dist'/>mm</td>
-		</tr>
-		<tr>
-		  <td>K-factor (ANSI)</td>
-		  <td>{{getKFactor(fdiffInput)}}</td>
-		</tr>
-	      </table>
-	    </td>
-
-	  </tr>
-	</table>
-	
-	<h3>Punch Distance Calculator</h3>
-	<img src="air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg" width="500px" />
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>SheetMetal Calculator</title>
+    <script src="js/prelude-browser-min.js"></script>
+    <script src="js/livescript-min.js"></script>
+    <script src="js/setImmediate-min.js"></script>
+    <script src="js/ractive-min.js"></script>
+    <!-- LiveScript dependencies -->
+    <script type="text/ls" src="event-emitter.ls"></script>
+    <script type="text/ls" src="script.ls"></script>
+    <script>require('livescript').go();</script>
+  </head>
+  <body>
+    <script type="text/ractive" id="template">
+      <h1>Sheet Metal Bending Calculator</h1>
+      <h5>
+         (<a href="https://github.com/ceremcem/sheetmetal_calculator">Source Code</a>)
+        (<a href="https://github.com/shaise/FreeCAD_SheetMetal">FC SheetMetal WB</a>)
+      </h5>
       <table>
-	<tr>
-	  <td>Flange Diff</td>
-	  <td><input value="{{fdiffInput}}" type="number"/>mm</td>
-	</tr>
-	<tr>
-	  <td>Mold Line Distance</td>
-	  <td><input value="{{ML}}" type="number"/>mm</td>
-	</tr>
-	<tr>
-	  <td><span style="color: red">x = ML + FD</span> = {{round2(ML)}} mm + {{round2(fdiffInput)}} mm =</td>
-	  <td><b>{{round2(ML + fdiffInput)}} mm</b></td>
-	</tr>
+        <tr>
+          <td>Inner radius </td>
+          <td>
+            <input value="{{innerRadius}}" type="number">mm 
+          </td>
+        </tr>
+        <tr> 
+          <td>Material thickness </td>
+          <td>
+            <input value="{{Mt}}" type="number">mm
+          </td>
+        </tr>
+        <tr>
+          <td>Bend angle </td>
+          <td>
+            <input value="{{bendAngle}}" disabled type="number">°
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr> 
+          <td>
+            <h3>Get 
+              <u>Flange Diff</u> by using K-factor 
+            </h3>
+            <table>
+              <tr>
+                <td>K-factor (ANSI)</td>
+                <td>
+                  <input value="{{kFactor}}" type="number">
+                </td>
+              </tr>
+              <tr>
+                <td>Flange Diff (FD)</td>
+                <td>{{flangeDiff}} mm </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <h3>Get 
+              <u>K-factor</u> by using Flange Diff 
+            </h3>
+            <table>
+              <tr>
+                <td><a tooltip="Flange - Mold_Line_distance">Flange Diff</a></td>
+                <td>
+                  <input value="{{fdiffInput}}" type="number">mm
+                </td>
+              </tr>
+              <tr> 
+                <td>K-Factor (ANSI)</td>
+                <td>{{getKFactor(fdiffInput)}}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <h3>Punch Distance Calculator</h3><img src="air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg" width="500px">
+      <table>
+        <tr>
+          <td>Flange Diff </td>
+          <td>
+            <input value="{{fdiffInput}}" type="number">mm
+          </td>
+        </tr>
+        <tr>
+          <td>Mold Line Distance</td>
+          <td>
+            <input value="{{ML}}" type="number">mm
+          </td>
+        </tr>
+        <tr> 
+          <td> <span style="color: red">x = ML + FD</span>= {{round2(ML)}} <i>mm</i> + {{round2(fdiffInput)}} <i>mm</i> 
+            = 
+          </td>
+          <td><b>{{round2(ML + fdiffInput)}} <i>mm</i></b></td>
+        </tr>
       </table>
       <div style="height: 200px"></div>
-	
-	<!--
-	<h3>Further values</h3>
-	<table>
-	  <tr>
-	    <td>Bend Allowance (BA)</td>
-	    <td>{{bendAllowance}} mm</td>
-	  </tr>
-	</table>
-	-->
-	</script>  
-	<script>  
-	  function round2(val){
-	    return parseInt(val * 100 + 0.5) / 100
-	  }
-
-	  const App = Ractive.extend({
-	    template: '#template',
-	    data: {
-	      innerRadius: 1.64,
-	      Mt: 2,
-	      kFactor: 0.38,
-	      bendAngle: 90,
-	      round2: round2,
-	      getKFactor: function(flangeDiff){
-					var ossb = this.get('ossb')
-				var ba = 2 * (ossb - flangeDiff)
-		var arc = this.get('bendAngle') / 360.0
-		var r = this.get('innerRadius')
-		var Mt = this.get('Mt')
-			    var kFactor = (ba / (2.0 * Math.PI * arc) - r) / Mt 
-		return round2(kFactor) 
-		}	
-	    },
-	    on: {
-		'sayHello': function(ctx){
-		alert(t('say hello'))
-			}
-		},
-	    computed: {
-	      bendAllowance: function(){
-		var arc = this.get('bendAngle') / 360.0
-		var r = this.get('innerRadius')
-		var Mt = this.get('Mt')
-		var kFactor = this.get('kFactor')
-			    var ba = 2.0 * Math.PI * (r + Mt * kFactor) * arc
-		return round2(ba)
-	      }, 
-	      ossb: function(){
-		// outside set back 
-		var r = this.get('innerRadius')
-		var Mt = this.get('Mt')
-		return round2(r + Mt)
-	      },
-	      flangeDiff: function(){
-		return round2(this.get('ossb') - this.get('bendAllowance') / 2)
-	      }
-	    }
-	  });
-
-	  const app = window.app = new App({
-	    target: 'body'
-	  });
-	</script>
-
-</body>
+    </script>
+  </body>
 </html>

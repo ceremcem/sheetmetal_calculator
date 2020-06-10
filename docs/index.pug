@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width")
+        title SheetMetal Calculator
+        //- 
+            script(src="js/paper-core.min.js")
+            script(src="js/paperjs-offset.js")
+        script(src="js/prelude-browser-min.js")
+        script(src="js/livescript-min.js")
+        script(src="js/setImmediate-min.js")
+        script(src="js/ractive-min.js")
+
+        // LiveScript dependencies 
+        script(type="text/ls" src="event-emitter.ls")
+        script(type="text/ls" src="script.ls")
+        script require('livescript').go();
+
+    body
+        script(type="text/ractive" id="template")
+            include app.pug
