@@ -2,8 +2,14 @@ doctype html
 html
     head
         meta(charset="utf-8")
-        meta(name="viewport" content="width=device-width")
+        meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
         title SheetMetal Calculator
+
+        // Cirrus 
+        link(rel="stylesheet" href="css/cirrus.min.css")
+        link(rel="stylesheet" href="css/nunito-sans.css")
+        link(rel="stylesheet" href="css/montserrat.css")
+        link(rel="stylesheet" href="css/fontawesome.css")
         //- 
             script(src="js/paper-core.min.js")
             script(src="js/paperjs-offset.js")
@@ -13,8 +19,8 @@ html
         script(src="js/ractive-min.js")
 
         // LiveScript dependencies 
-        script(type="text/ls" src="event-emitter.ls")
-        script(type="text/ls" src="app.ls")
+        script(type="text/ls" src="ls/event-emitter.ls")
+        script(type="text/ls" src="app/app.ls")
         script require('livescript').go();
 
     body
