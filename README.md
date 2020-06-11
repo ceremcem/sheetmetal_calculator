@@ -5,6 +5,6 @@ See https://ceremcem.github.io/sheetmetal_calculator/
 # Development 
 
 1. Run `build.sh` in another terminal. 
-1. Open `index.html` in your browser. 
+2. Open `index.html` in your browser. 
 
-Editing `app/app.pug` (and `index.pug`) will instantly update the `index.html`.
+Editing `app/app.pug` and `app/app.ls` will instantly update the `index.html` and `bundle.js`.

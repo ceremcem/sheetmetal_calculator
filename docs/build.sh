@@ -10,9 +10,6 @@ else
     echo "No $(basename $pug_file) found."
 fi
 
-while :; do
-    browserify app/app.ls -o app.js -t browserify-livescript
-    sleep 1s
-done
+rollup --config -w rollup.config.js
 
-wait 
+wait

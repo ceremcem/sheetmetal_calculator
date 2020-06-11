@@ -1,0 +1,32 @@
+{
+  "name": "sheetmetal_calculator",
+  "version": "0.2.0",
+  "description": "SheetMetal Online Calculator",
+  "main": "app.js",
+  "dependencies": {
+    "browserify-livescript": "^0.2.4",
+    "prelude-ls": "^1.2.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.1",
+    "rollup-plugin-livescript": "^0.1.1",
+    "rollup-plugin-node-builtins": "^2.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceremcem/sheetmetal_calculator.git"
+  },
+  "keywords": [
+    "SheetMetal"
+  ],
+  "author": "Cerem Cem ASLAN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ceremcem/sheetmetal_calculator/issues"
+  },
+  "homepage": "https://github.com/ceremcem/sheetmetal_calculator#readme"
+}

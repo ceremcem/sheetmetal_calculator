@@ -1,4 +1,5 @@
-require! 'prelude-ls': {abs, empty}
+require! 'prelude-ls': {abs}
+
 sleep = (ms, f) -> set-timeout f, ms 
 
 round2 = (val) -> parseInt(val * 100 + 0.5) / 100
@@ -11,7 +12,7 @@ new Ractive do
     Mt: 2             # Material Thickness
     kFactor: 0.38     # K-Factor 
     bendAngle: 90     # angle
-    round2: round2,
+    round2: round2
     getKFactor: (flangeDiff) -> 
       ossb = @get('ossb')
       ba = 2 * (ossb - flangeDiff)
