@@ -21,6 +21,10 @@ new Ractive do
       Mt = @get('Mt')
       kFactor = (ba / (2.0 * Math.PI * arc) - r) / Mt 
       return round2(kFactor) 
+  on:
+    complete: -> 
+      $('.ui.dropdown').dropdown()
+      
   computed: 
     bendAllowance: ->
       arc = @get('bendAngle') / 360.0

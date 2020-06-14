@@ -1372,6 +1372,11 @@
         return round2(kFactor);
       }
     },
+    on: {
+      complete: function(){
+        return $('.ui.dropdown').dropdown();
+      }
+    },
     computed: {
       bendAllowance: function(){
         var arc, r, Mt, kFactor, ba;

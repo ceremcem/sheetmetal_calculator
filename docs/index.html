@@ -2,58 +2,67 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>SheetMetal Calculator</title>
-    <!-- Cirrus -->
-    <link rel="stylesheet" href="css/cirrus.min.css">
-    <link rel="stylesheet" href="css/nunito-sans.css">
-    <link rel="stylesheet" href="css/montserrat.css">
+    <script src="css/semantic-ui/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/semantic-ui/semantic.min.css">
+    <script src="css/semantic-ui/semantic.min.js"></script>
     <link rel="stylesheet" href="css/fontawesome.css">
-    <script src="js/prelude-browser-min.js"></script>
-    <script src="js/livescript-min.js"></script>
-    <script src="js/setImmediate-min.js"></script>
     <script src="js/ractive-min.js"></script>
+    <script src="js/setImmediate-min.js"></script>
+    <style type="text/css">
+      body {
+        background-color: #FFFFFF;
+      }
+      .ui.menu .item img.logo {
+        margin-right: 1.5em;
+      }
+      .main.container {
+        margin-top: 5em;
+      }
+      .wireframe {
+        margin-top: 2em;
+      }
+      .ui.footer.segment {
+        margin: 5em 0em 0em;
+        padding: 5em 0em;
+      }
+      
+    </style>
   </head>
   <body>
     <script type="text/ractive" id="template">
-      <div class="header header-fixed unselectable header-animated">
-        <div class="header-brand">
-          <div class="nav-item no-hover">
-            <h6 class="title">Sheet Metal Bending Calculator</h6>
-          </div>
-          <div class="nav-item nav-btn" id="header-btn"><span></span><span> </span><span></span></div>
-        </div>
-        <div class="header-nav" id="header-menu">
-          <div class="nav-left">
-            <div class="nav-item text-center"><a href="#"><span class="icon"><i class="fab fa-wrapper fa-twitter" aria-hidden="true"></i></span></a></div>
-          </div>
-          <div class="nav-right">
-            <div class="nav-item has-sub toggle-hover" id="dropdown"><a class="nav-dropdown-link">Menu </a>
-              <ul class="dropdown dropdown-menu dropdown-animated" role="menu">
-                <li class="menu-item"> <a href="https://github.com/ceremcem/sheetmetal_calculator"> <span class="icon"><i class="fab fa-wrapper fa-github" aria-hidden="true"></i></span>Source Code</a></li>
-                <li class="menu-item"><a href="https://github.com/shaise/FreeCAD_SheetMetal">FC SheetMetal WB</a></li>
-                <li class="menu-item"><a href="https://github.com/shaise/FreeCAD_SheetMetal#terminology">Terminology</a></li>
-              </ul>
-            </div>
+      <div class="ui fixed inverted menu">
+        <div class="ui container"><a class="header item" href="#">SheetMetal Bending Calculator </a>
+          <div class="ui simple dropdown item">Menu <i class="dropdown icon"></i>
+            <div class="menu"><a class="item" href="https://github.com/ceremcem/sheetmetal_calculator"> <span class="icon"><i class="fab fa-wrapper fa-github" aria-hidden="true"></i></span>Source Code</a><a class="item" href="https://github.com/shaise/FreeCAD_SheetMetal">
+                 FC SheetMetal WB</a><a class="item" href="https://github.com/shaise/FreeCAD_SheetMetal#terminology">
+                 Terminology</a></div>
           </div>
         </div>
       </div>
-      <div class="hero fullscreen">
-        <div class="hero-body u-center">
-          <div class="w-90" style="position: relative">
-            <div class="row-level">
-              <div class="col-6" style="padding: 2rem;">
+      <div class="ui main container">
+        <h3 class="ui block top attached header">K-factor Calculator</h3>
+        <div class="ui attached segment">
+          <div class="ui two column stackable grid">
+            <div class="row">
+              <div class="column"> 
                 <table>
                   <tr>
                     <td>Inner radius (mm)</td>
                     <td>
-                      <input class="inline" value="{{innerRadius}}" type="number">
+                      <div class="ui input">
+                        <input class="inline" value="{{innerRadius}}" type="number">
+                      </div>
                     </td>
                   </tr>
                   <tr> 
                     <td>Material thickness (mm)</td>
-                    <td>
-                      <input value="{{Mt}}" type="number">
+                    <td> 
+                      <div class="ui input">
+                        <input value="{{Mt}}" type="number">
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -64,15 +73,17 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-6">
+              <div class="column">
                 <h5>Get 
                   <u>Flange Diff</u> by using K-factor 
                 </h5>
                 <table>
                   <tr>
                     <td>K-factor (ANSI)</td>
-                    <td>
-                      <input value="{{kFactor}}" type="number">
+                    <td> 
+                      <div class="ui input">
+                        <input value="{{kFactor}}" type="number">
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -81,15 +92,17 @@
                   </tr>
                 </table>
               </div>
-              <div class="col-6">
+              <div class="column">
                 <h5>Get 
                   <u>K-factor</u> by using Flange Diff 
                 </h5>
                 <table>
                   <tr>
                     <td>Flange Diff (mm) <span title="Flange - Mold_Line_distance">*</span> </td>
-                    <td>
-                      <input value="{{fdiffInput}}" type="number">
+                    <td> 
+                      <div class="ui input">
+                        <input value="{{fdiffInput}}" type="number">
+                      </div>
                     </td>
                   </tr>
                   <tr> 
@@ -99,36 +112,39 @@
                 </table>
               </div>
             </div>
-            <div class="row">
-              <h3>Punch Distance Calculator</h3>
-            </div>
-            <div class="row w-40 h-40"><img src="img/air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg" width="500px"></div>
-            <div class="row">
-              <table>
-                <tr>
-                  <td>Flange Diff </td>
-                  <td>
-                    <input value="{{fdiffInput}}" type="number">mm
-                  </td>
-                </tr>
-                <tr>
-                  <td>Mold Line Distance</td>
-                  <td>
-                    <input value="{{ML}}" type="number">mm
-                  </td>
-                </tr>
-                <tr> 
-                  <td> <span style="color: red">x = ML + FD</span>= {{round2(ML)}} <i>mm</i> + {{round2(fdiffInput)}} <i>mm</i> 
-                    = 
-                  </td>
-                  <td><b>{{round2(ML + fdiffInput)}} <i>mm</i></b></td>
-                </tr>
-              </table>
-            </div>
-            <div class="row"></div>
           </div>
-          <div class="row h-40"></div>
         </div>
+        <h3 class="ui block attached header">Punch Distance Calculator</h3>
+        <div class="ui attached segment">
+          <div class="row"><img class="ui fluid large image" src="img/air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg"></div>
+          <div class="row">
+            <table>
+              <tr>
+                <td>Flange Diff </td>
+                <td> 
+                  <div class="ui input">
+                    <input value="{{fdiffInput}}" type="number">mm
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Mold Line Distance</td>
+                <td> 
+                  <div class="ui input">
+                    <input value="{{ML}}" type="number">mm
+                  </div>
+                </td>
+              </tr>
+              <tr> 
+                <td> <span style="color: red">x = ML + FD</span>= {{round2(ML)}} <i>mm</i> + {{round2(fdiffInput)}} <i>mm</i> 
+                  = 
+                </td>
+                <td><b>{{round2(ML + fdiffInput)}} <i>mm</i></b></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="ui inverted section divider"></div>
       </div>
     </script>
     <!-- App-->

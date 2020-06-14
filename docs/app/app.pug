@@ -1,91 +1,80 @@
-//- Cirrus cheatsheet: https://spiderpig86.github.io/Cirrus/docs/components/
+//- Fixed Menu: https://semantic-ui.com/examples/fixed.html
+.ui.fixed.inverted.menu
+  .ui.container
+    a(href="#").header.item SheetMetal Bending Calculator 
+    .ui.simple.dropdown.item
+      | Menu #[i.dropdown.icon]
+      .menu
+        a.item(href="https://github.com/ceremcem/sheetmetal_calculator") 
+          span.icon #[i.fab.fa-wrapper.fa-github(aria-hidden="true")]
+          | Source Code
+        a.item(href="https://github.com/shaise/FreeCAD_SheetMetal") 
+          | FC SheetMetal WB
+        a.item(href="https://github.com/shaise/FreeCAD_SheetMetal#terminology") 
+          | Terminology
 
-.header.header-fixed.unselectable.header-animated
-  .header-brand
-    .nav-item.no-hover
-      h6.title Sheet Metal Bending Calculator
-    .nav-item.nav-btn#header-btn
-      span
-      span 
-      span
-  .header-nav#header-menu
-    .nav-left
-      .nav-item.text-center
-        a(href="#")
-          span.icon #[i.fab.fa-wrapper.fa-twitter(aria-hidden="true")]
-    .nav-right
-      .nav-item.has-sub.toggle-hover#dropdown
-        a.nav-dropdown-link Menu 
-        ul.dropdown.dropdown-menu.dropdown-animated(role="menu")
-          li.menu-item 
-            a(href="https://github.com/ceremcem/sheetmetal_calculator") 
-              span.icon #[i.fab.fa-wrapper.fa-github(aria-hidden="true")]
-              | Source Code
-          li.menu-item
-            a(href="https://github.com/shaise/FreeCAD_SheetMetal") FC SheetMetal WB
-          li.menu-item #[a(href="https://github.com/shaise/FreeCAD_SheetMetal#terminology") Terminology]
+.ui.main.container
 
-.hero.fullscreen
-  .hero-body.u-center
-    .w-90(style="position: relative")
-      .row-level
-        .col-6(style="padding: 2rem;")
-
+  h3.ui.block.top.attached.header K-factor Calculator
+  .ui.attached.segment
+    .ui.two.column.stackable.grid
+      .row
+        .column 
           table
             tr
               td Inner radius (mm)
-              td #[input.inline(value="{{innerRadius}}" type="number")]
+              td
+                  .ui.input #[input.inline(value="{{innerRadius}}" type="number")]
             tr 
               td Material thickness (mm)
-              td #[input(value="{{Mt}}" type="number")]
+              td 
+                .ui.input #[input(value="{{Mt}}" type="number")]
             tr
               td Bend angle 
               td 90°
-
-
       .row
-        .col-6
+        .column
           h5 Get #[u Flange Diff] by using K-factor 
           table
             tr
               td K-factor (ANSI)
-              td #[input(value="{{kFactor}}" type="number")]
+              td 
+                .ui.input #[input(value="{{kFactor}}" type="number")]
             tr
               td Flange Diff (FD)
               td {{flangeDiff}} mm 
-        .col-6
+        .column
           h5 Get #[u K-factor] by using Flange Diff 
           table
             tr
               td Flange Diff (mm) #[span(title="Flange - Mold_Line_distance") *] 
-              td #[input(value="{{fdiffInput}}" type="number")]
+              td 
+                .ui.input #[input(value="{{fdiffInput}}" type="number")]
             tr 
               td K-Factor (ANSI)
               td {{getKFactor(fdiffInput)}}
+  
+  h3.ui.block.attached.header Punch Distance Calculator
+  .ui.attached.segment
+    .row
+      img.ui.fluid.large.image(src="img/air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg")
 
-      .row
-        h3 Punch Distance Calculator
+    .row
+      table
+        tr
+          td Flange Diff 
+          td 
+            .ui.input #[input(value="{{fdiffInput}}" type="number")]mm
+        tr
+          td Mold Line Distance
+          td 
+            .ui.input #[input(value="{{ML}}" type="number")]mm
+        tr 
+          td 
+            span(style="color: red") x = ML + FD
+            | = {{round2(ML)}} #[i mm] + {{round2(fdiffInput)}} #[i mm] 
+            | = 
+          td
+            b {{round2(ML + fdiffInput)}} #[i mm]
 
-      .row.w-40.h-40
-        img(src="img/air-bending-punch-distances.svg" alt="air-bending-punch-distances.svg" width="500px")
-
-      .row
-        table
-          tr
-            td Flange Diff 
-            td #[input(value="{{fdiffInput}}" type="number")]mm
-          tr
-            td Mold Line Distance
-            td #[input(value="{{ML}}" type="number")]mm
-          tr 
-            td 
-              span(style="color: red") x = ML + FD
-              | = {{round2(ML)}} #[i mm] + {{round2(fdiffInput)}} #[i mm] 
-              | = 
-            td
-              b {{round2(ML + fdiffInput)}} #[i mm]
-
-      .row
-          
-
-    .row.h-40
+  .ui.inverted.section.divider
